@@ -1,0 +1,55 @@
+<div class="container">
+  <mat-toolbar >
+    <span>Agregar Productos</span>
+  </mat-toolbar>
+<br>
+    <mat-card style="margin-top: 10px">
+
+      <form [formGroup]="form" (ngSubmit)="addProduct()">
+
+        <mat-grid-list cols="4" rowHeight="80px">
+
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+            <mat-form-field class="ancho">
+              <mat-label>Codigo Producto</mat-label>
+              <input matInput formControlName="productCode">
+            </mat-form-field>
+
+
+          </mat-grid-tile>
+
+          <!-- Imagen -->
+          
+          <mat-grid-tile [colspan]="3" [rowspan]="4"></mat-grid-tile>
+          
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field class="ancho">
+            <mat-label>Descripción Producto</mat-label>
+            <input matInput formControlName="productDescription">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field class="ancho">
+            <mat-label>Valor Producto</mat-label>
+            <input matInput formControlName="unitValue">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+            <button mat-button routerLink="/dashboard/Product">Volver</button>
+            <button type="submit" [disabled]="form.invalid" mat-button color="primary">Guardar</button>
+
+        </mat-grid-tile>
+
+        </mat-grid-list>
+        
+        <br>
+        <br>
+
+      </form>
+    </mat-card>
+
+</div>

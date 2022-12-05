@@ -1,0 +1,75 @@
+<div class="container">
+    <mat-toolbar >
+      <span>Agregar Orden</span>
+    </mat-toolbar>
+  <br>
+      <mat-card style="margin-top: 10px">
+        <form [formGroup]="form" (ngSubmit)="addOrder()" >
+          <mat-grid-list cols="5" rowHeight="80px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="ancho">
+                  <mat-label>Cliente DNI</mat-label>
+                  <input matInput formControlName="customerDNI" value="inputCustomerDNI" >
+                </mat-form-field>
+              </mat-grid-tile>
+            <!-- Imagen -->
+            <mat-grid-tile [colspan]="4" [rowspan]="5"></mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="ancho">
+                  <mat-label>Dirección Clente</mat-label>
+                  <input matInput formControlName="customerAddress">
+                </mat-form-field>
+              </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="ancho">
+              <mat-label>Cantidad</mat-label>
+              <input matInput formControlName="quantity">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field >
+              <mat-label>Tipo Producto</mat-label>
+              <mat-select  formControlName="selectionProduct" (selectionChange)="CaptureSelectData()">
+                <mat-option *ngFor="let pt of products" [value]="pt" >
+                  {{pt.productDescription}} - {{pt.unitValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+              <button mat-button routerLink="/dashboard/Order">Volver</button>
+              <button type="submit" [disabled]="form.invalid" mat-button color="primary">Guardar</button>
+          </mat-grid-tile>
+          </mat-grid-list>
+          <br>
+          <br>
+        </form>
+      </mat-card>
+  </div>
+
+  <div *ngIf="tableTemp.length > 0">
+    <table mat-table [dataSource]="tableTemp" class="mat-elevation-z8" #dataTable>
+      <ng-container matColumnDef="product_code">
+        <th mat-header-cell *matHeaderCellDef> Codigo Producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.productCode}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="product_description">
+        <th mat-header-cell *matHeaderCellDef> Descripción Producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.productDescription}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Valor Producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit_value">
+        <th mat-header-cell *matHeaderCellDef> Valor Producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.unitValue}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
